@@ -11,10 +11,14 @@ function gettingJSON(){
     console.log("Location is : " + location);
 
     //set default temperature format if one isn't provided
-    let format = "imperial";
-    if (document.querySelector("input[name=temp]:checked")){
-        format =  document.querySelector("input[name=temp]:checked").value;
+    let format;
+    if (document.querySelectorAll("input[name=temp]:checked").length == 0){
+        format = "imperial"
+    } else {
+        format = document.querySelectorAll("input[name=temp]:checked")[0].value;
+
     }
+
     // Your code here.
     console.log("Format is " + format);
 
@@ -38,9 +42,12 @@ function gettingJSON(){
         //elements in HTML.  
         //I would print the JSON to the console
         // Your code here.
-        console.log(json);
-        loc.innerHTML = json["name"];
-        temp.innerHTML = json["main"]["temp"];
-        tempImg.src = "http://openweathermap.org/img/wn/" + json["weather"][0]["icon"] + ".png";
+        // console.log(json);
+        loc.innerHTML = (json["name"])
+        temp.innerHTML = (json["main"].temp) + " with " + (json["weather"][0].description)
+        console.log(JSON.stringify(json));
+        tempImg.src = "http://openweathermap.org/img/wn/" + (json["weather"][0].icon + ".png")
+        tempImg.alt - (json["weather"][0].description)
+        console.log("icon is" + json["weather"][0].icon)
     });
 }
